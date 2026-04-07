@@ -83,6 +83,7 @@ documentation:
   readme: README.md
   skill_doc: SKILL.md
   examples: examples/
+  contributing: CONTRIBUTING.md
 
 # 发布
 publish:

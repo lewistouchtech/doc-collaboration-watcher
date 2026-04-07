@@ -105,7 +105,7 @@ git clone https://github.com/lewistouchtech/doc-collaboration-watcher.git
 
 ## 🚀 快速开始
 
-### 1. 配置监控目录
+### 1. 配置监控目录和通道
 
 ```json
 // config.json
@@ -113,11 +113,19 @@ git clone https://github.com/lewistouchtech/doc-collaboration-watcher.git
   "workspace": "/Users/bot-eva/.openclaw/workspace",
   "docs_dir": "docs",
   "watch_pattern": "*.md",  // 监控所有.md 文件（自动发现）
+  
   "notification": {
-    "channels": ["feishu", "wechat", "imessage", "webchat"],
+    "channels": ["feishu", "wechat", "webchat"],  // 根据你的工具配置
     "response_timeout_minutes": 5,
     "evaluation_timeout_minutes": 30
   },
+  
+  "roles": [
+    {"role": "firmware", "description": "固件开发"},
+    {"role": "frontend", "description": "前端开发"},
+    {"role": "backend", "description": "后端开发"}
+  ],
+  
   "integration": {
     "openclaw_memory": {
       "enabled": true,
@@ -126,6 +134,12 @@ git clone https://github.com/lewistouchtech/doc-collaboration-watcher.git
   }
 }
 ```
+
+**通道配置说明**：
+- 🇨🇳 国内：`feishu` | `wechat` | `wecom` | `dingtalk`
+- 🌍 国际：`telegram` | `slack` | `discord` | `whatsapp` | `imessage`
+- 💻 Web：`webchat` | `matrix`
+- **完整列表**：见 `examples/CONFIG-CHANNELS.md`
 
 ### 2. 启动监控
 
@@ -343,4 +357,62 @@ echo "# 测试变更" >> docs/esp32-collaboration.md
 
 ---
 
-*本技能由伊娃开发，用于多代理协作文档实时监控 | 已服务 8 个项目，整理 56 个文档*
+## 🤝 贡献与反馈
+
+### 欢迎一起优化！
+
+这是一个**开源技能**，欢迎所有人参与改进：
+
+#### 🐛 报告问题
+- **GitHub Issues**: https://github.com/lewistouchtech/doc-collaboration-watcher/issues
+- 描述你遇到的问题
+- 附上错误日志和配置
+- 我们会尽快修复
+
+#### 💡 功能建议
+- **GitHub Discussions**: https://github.com/lewistouchtech/doc-collaboration-watcher/discussions
+- 分享你的使用场景
+- 提出改进建议
+- 投票支持想要的功能
+
+#### 🔧 提交代码
+- **Pull Requests**: https://github.com/lewistouchtech/doc-collaboration-watcher/pulls
+- Fork 仓库
+- 创建功能分支
+- 提交 PR 描述变更
+- 通过审核后合并
+
+#### 📖 改进文档
+- 文档有错别字？
+- 配置说明不清楚？
+- 缺少使用示例？
+- 欢迎提交 PR 改进！
+
+---
+
+## 📞 联系我们
+
+- **作者**: 伊娃 (Eva)
+- **邮箱**: lewis.touchtech@gmail.com
+- **公司**: 伊娃人工智能有限公司
+- **使命**: 寻找 AI 可以快速改变的细分领域机会，快速构建稳定可靠的 AI 应用
+
+---
+
+## 🌟 社区驱动
+
+**我们相信**：最好的工具是大家一起打造的！
+
+- ✅ 你的痛点，我们解决
+- ✅ 你的建议，我们实现
+- ✅ 你的代码，我们合并
+- ✅ 你的反馈，我们改进
+
+**已贡献者**：
+- 伊娃（初始版本）
+- 李威（老板，产品指导）
+- 🫵 下一位贡献者就是你！
+
+---
+
+*本技能由伊娃开发，用于多代理协作文档实时监控 | 已服务 8 个项目，整理 56 个文档 | 开源协作，共同优化*

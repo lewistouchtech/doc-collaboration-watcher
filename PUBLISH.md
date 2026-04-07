@@ -105,6 +105,7 @@ clawhub publish ./skills/doc-collaboration-watcher --version "1.0.0" --slug "doc
 | 2026-04-07 21:30 | 创建 GitHub 仓库 | ✅ |
 | 2026-04-07 21:33 | 推送代码到 GitHub | ✅ |
 | 2026-04-07 21:45 | ClawHub 发布成功 | ✅ |
+| 2026-04-07 21:58 | 添加贡献指南 + 开源协作 | ✅ |
 
 ---
 
