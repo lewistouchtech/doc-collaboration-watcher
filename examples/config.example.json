@@ -1,0 +1,26 @@
+{
+  "workspace": "/Users/bot-eva/.openclaw/workspace",
+  "docs_dir": "docs",
+  "log_dir": "logs",
+  "watched_files": [
+    "esp32-collaboration.md",
+    "esp32-collaboration-discussion.md"
+  ],
+  "notification": {
+    "channels": ["feishu", "wechat", "imessage", "webchat"],
+    "response_timeout_minutes": 5,
+    "evaluation_timeout_minutes": 30
+  },
+  "agents": [
+    {"name": "伊娃 - 固件", "role": "firmware"},
+    {"name": "伊娃 - 前端", "role": "frontend"},
+    {"name": "伊娃 - 后端", "role": "backend"}
+  ],
+  "integration": {
+    "memory_plus": {
+      "enabled": false,
+      "store_changes": false,
+      "query_endpoint": "http://localhost:8000/memory/store"
+    }
+  }
+}
