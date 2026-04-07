@@ -63,6 +63,7 @@ clawhub publish ./skills/doc-collaboration-watcher --version "1.0.0" --slug "doc
 | **作者** | Eva (李伊娃) |
 | **邮箱** | lewis.touchtech@gmail.com |
 | **许可证** | MIT |
+| **记忆集成** | OpenClaw 原生 SQLite（默认启用） |
 
 ### 功能特性
 - ✅ 文件变更实时监控（<5 秒）

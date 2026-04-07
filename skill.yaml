@@ -89,3 +89,9 @@ publish:
   public: true
   featured: false
   clawhub: true
+
+# 集成
+integration:
+  openclaw_memory:
+    enabled: true
+    store_events: true
