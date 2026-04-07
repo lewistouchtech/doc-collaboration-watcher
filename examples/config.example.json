@@ -6,19 +6,11 @@
   "watch_pattern": "*.md",
   
   "notification": {
-    "channels": ["feishu", "wechat", "imessage", "webchat"],
+    "auto_channels": true,
+    "channels": [],
     "response_timeout_minutes": 5,
     "evaluation_timeout_minutes": 30
   },
-  
-  "roles": [
-    {"role": "firmware", "description": "固件开发负责人"},
-    {"role": "frontend", "description": "前端开发负责人"},
-    {"role": "backend", "description": "后端开发负责人"},
-    {"role": "tester", "description": "测试负责人"},
-    {"role": "architect", "description": "架构师"},
-    {"role": "product", "description": "产品经理"}
-  ],
   
   "integration": {
     "openclaw_memory": {

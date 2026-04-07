@@ -32,15 +32,10 @@ config:
   workspace: ~/.openclaw/workspace
   docs_dir: docs
   log_dir: logs
-  watched_files:
-    - esp32-collaboration.md
-    - esp32-collaboration-discussion.md
+  watch_pattern: "*.md"
   notification:
-    channels:
-      - feishu
-      - wechat
-      - imessage
-      - webchat
+    auto_channels: true  # ✅ 自动读取 OpenClaw 配置的通道
+    channels: []         # 留空（自动填充）
     response_timeout_minutes: 5
     evaluation_timeout_minutes: 30
 

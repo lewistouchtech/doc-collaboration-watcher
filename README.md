@@ -105,26 +105,52 @@ git clone https://github.com/lewistouchtech/doc-collaboration-watcher.git
 
 ## 🚀 快速开始
 
-### 1. 配置监控目录和通道
+### 1. 零配置启动（推荐）⭐
+
+**无需任何配置！技能自动读取你的 OpenClaw 通道！**
+
+```bash
+# 安装技能
+openclaw skills install doc-collaboration-watcher
+
+# 启动监控
+openclaw skills enable doc-collaboration-watcher
+```
+
+**自动检测**：
+- ✅ 自动读取 `~/.openclaw/config/openclaw.json`
+- ✅ 自动使用所有 `enabled: true` 的通道
+- ✅ 自动监控 `workspace/docs/*.md`
+
+**示例**：
+```json
+// 你的 OpenClaw 配置
+{
+  "channels": {
+    "feishu": { "enabled": true },  // ✅ 自动使用
+    "imessage": { "enabled": true }, // ✅ 自动使用
+    "telegram": { "enabled": false } // ❌ 不使用
+  }
+}
+```
+
+---
+
+### 2. 自定义配置（可选）
 
 ```json
 // config.json
 {
   "workspace": "/Users/bot-eva/.openclaw/workspace",
   "docs_dir": "docs",
-  "watch_pattern": "*.md",  // 监控所有.md 文件（自动发现）
+  "watch_pattern": "*.md",
   
   "notification": {
-    "channels": ["feishu", "wechat", "webchat"],  // 根据你的工具配置
+    "auto_channels": true,  // ✅ 自动读取 OpenClaw 通道（默认）
+    "channels": [],          // 留空（自动填充）
     "response_timeout_minutes": 5,
     "evaluation_timeout_minutes": 30
   },
-  
-  "roles": [
-    {"role": "firmware", "description": "固件开发"},
-    {"role": "frontend", "description": "前端开发"},
-    {"role": "backend", "description": "后端开发"}
-  ],
   
   "integration": {
     "openclaw_memory": {
@@ -134,12 +160,6 @@ git clone https://github.com/lewistouchtech/doc-collaboration-watcher.git
   }
 }
 ```
-
-**通道配置说明**：
-- 🇨🇳 国内：`feishu` | `wechat` | `wecom` | `dingtalk`
-- 🌍 国际：`telegram` | `slack` | `discord` | `whatsapp` | `imessage`
-- 💻 Web：`webchat` | `matrix`
-- **完整列表**：见 `examples/CONFIG-CHANNELS.md`
 
 ### 2. 启动监控
 
@@ -192,33 +212,6 @@ echo "# 测试变更" >> docs/esp32-collaboration.md
 
 ## 🔧 配置说明
 
-### 完整配置示例
-
-```json
-{
-  "workspace": "/Users/bot-eva/.openclaw/workspace",
-  "docs_dir": "docs",
-  "log_dir": "logs",
-  "watch_pattern": "*.md",
-  "notification": {
-    "channels": ["feishu", "wechat", "imessage", "webchat"],
-    "response_timeout_minutes": 5,
-    "evaluation_timeout_minutes": 30
-  },
-  "agents": [
-    {"name": "伊娃 - 固件", "role": "firmware"},
-    {"name": "伊娃 - 前端", "role": "frontend"},
-    {"name": "伊娃 - 后端", "role": "backend"}
-  ],
-  "integration": {
-    "openclaw_memory": {
-      "enabled": true,
-      "store_events": true
-    }
-  }
-}
-```
-
 ### 配置项说明
 
 | 字段 | 类型 | 默认值 | 说明 |
@@ -226,11 +219,46 @@ echo "# 测试变更" >> docs/esp32-collaboration.md
 | `workspace` | string | 必填 | 工作目录 |
 | `docs_dir` | string | "docs" | 文档目录 |
 | `watch_pattern` | string | "*.md" | 监控文件模式 |
-| `notification.channels` | array | 必填 | 通知通道 |
+| `notification.auto_channels` | boolean | `true` | **自动读取 OpenClaw 通道（推荐）** |
+| `notification.channels` | array | `[]` | 手动指定通道（留空自动填充） |
 | `response_timeout_minutes` | number | 5 | 响应超时（分钟） |
 | `evaluation_timeout_minutes` | number | 30 | 评估超时（分钟） |
 | `integration.openclaw_memory.enabled` | boolean | true | 启用记忆集成 |
 | `integration.openclaw_memory.store_events` | boolean | true | 存储变更事件 |
+
+---
+
+### 🎯 为什么零配置？
+
+**之前的问题**：
+```json
+❌ 用户需要手动配置 channels: ["feishu", "wechat"]
+❌ 用户需要定义 roles: ["firmware", "frontend"]
+❌ 不同用户配置不同，无法通用
+```
+
+**现在的方案**：
+```json
+✅ 自动读取 ~/.openclaw/config/openclaw.json
+✅ 自动使用 enabled: true 的通道
+✅ 无需定义角色，通知到所有通道
+✅ 所有用户零配置启动
+```
+
+**技术实现**：
+```python
+# doc-watcher.py 自动读取
+def load_openclaw_channels():
+    config = json.load(open('~/.openclaw/config/openclaw.json'))
+    channels = config.get('channels', {})
+    return [name for name, cfg in channels.items() if cfg.get('enabled')]
+```
+
+**结果**：
+- 飞书用户 → 自动用飞书
+- Telegram 用户 → 自动用 Telegram
+- 多通道用户 → 自动用所有通道
+- **所有人都零配置！**
 
 ---
 
