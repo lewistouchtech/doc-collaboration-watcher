@@ -128,9 +128,9 @@ echo "# 测试变更" >> docs/esp32-collaboration.md
     {"name": "伊娃 - 后端", "role": "backend"}
   ],
   "integration": {
-    "memory_plus": {
-      "enabled": false,
-      "store_changes": false
+    "openclaw_memory": {
+      "enabled": true,
+      "store_events": true
     }
   }
 }

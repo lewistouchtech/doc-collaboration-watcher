@@ -17,10 +17,9 @@
     {"name": "伊娃 - 后端", "role": "backend"}
   ],
   "integration": {
-    "memory_plus": {
-      "enabled": false,
-      "store_changes": false,
-      "query_endpoint": "http://localhost:8000/memory/store"
+    "openclaw_memory": {
+      "enabled": true,
+      "store_events": true
     }
   }
 }
